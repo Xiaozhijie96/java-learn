@@ -1,7 +1,5 @@
 package com.xiao.basics;
 
-import java.util.Objects;
-
 /**
  * Description String相关 <br>
  *
@@ -16,6 +14,24 @@ public class StringTest {
     public static void main(String[] args) {
         test1();
         test2();
+        replaceTest();
+    }
+
+    /**
+     * description replaceFirst、replaceAll、replace区别
+     * replace 替换所有
+     * replaceFirst 替换第一个,可以使用正则表达式
+     * replaceAll 替换所有,可以使用正则表达式
+     *
+     * @author xiao
+     * date  17:02:55
+     */
+    private static void replaceTest() {
+        String str = "ab1ad3ede";
+        System.out.println(str.replace("a", "A"));
+        System.out.println(str.replaceAll("\\d", "A"));
+        System.out.println(str.replaceFirst("\\d", "H"));
+
     }
 
     /**
@@ -38,6 +54,7 @@ public class StringTest {
                     "sex": 1
                 }
                 """;
+        
         System.out.println(str1);
         System.out.println(str2);
         System.out.println(str3);
@@ -52,6 +69,8 @@ public class StringTest {
 
     /***
      * description 字符串累加耗时
+     * 用时从短到长的对比是
+     * StringBuilder < StringBuffer < concat < +
      *
      * @author xiao
      * date  14:37:32
@@ -76,6 +95,11 @@ public class StringTest {
             stringBuilder.append(string);
         }
         System.out.println("StringBuilder累加用时:" + (System.currentTimeMillis() - start3) + "ms");
+        long start4 = System.currentTimeMillis();
+        for (int i = 0; i < 10000; i++) {
+            string1 = string1.concat(string);
+        }
+        System.out.println("concat累加用时:" + (System.currentTimeMillis() - start4) + "ms");
     }
 
 }
