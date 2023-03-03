@@ -79,7 +79,7 @@ public class ListTest {
         }
         // 第三种：forEach jdk8
         list.forEach(System.out::println);
-        // 第三种：使用迭代器Iterator
+        // 第四种：使用迭代器Iterator
         Iterator<Integer> iterator = list.iterator();
         while (iterator.hasNext()) {
             Integer next = iterator.next();
