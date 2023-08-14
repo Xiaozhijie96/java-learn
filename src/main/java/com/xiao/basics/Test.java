@@ -28,10 +28,23 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        A a=new A();
-        a.show();
-        B b=new B();
-        b.show();
+//        A a=new A();
+//        a.show();
+//        B b=new B();
+//        b.show();
+        Test test = new Test();
+        Test.MyClass myClass1 = test.new MyClass();
 
+        Test.MyClass myClass2 = test.new MyClass();
+        System.out.println(myClass1.i);
+        System.out.println(myClass1.j);
+        System.out.println(myClass2.i);
+        System.out.println(myClass2.j);
+
+    }
+
+    class MyClass {
+        public final double i = Math.random();
+        public static double j = Math.random();
     }
 }
