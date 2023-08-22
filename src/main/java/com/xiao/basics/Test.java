@@ -32,14 +32,15 @@ public class Test {
 //        a.show();
 //        B b=new B();
 //        b.show();
-        Test test = new Test();
-        Test.MyClass myClass1 = test.new MyClass();
-
-        Test.MyClass myClass2 = test.new MyClass();
-        System.out.println(myClass1.i);
-        System.out.println(myClass1.j);
-        System.out.println(myClass2.i);
-        System.out.println(myClass2.j);
+//        Test test = new Test();
+//        Test.MyClass myClass1 = test.new MyClass();
+//
+//        Test.MyClass myClass2 = test.new MyClass();
+//        System.out.println(myClass1.i);
+//        System.out.println(myClass1.j);
+//        System.out.println(myClass2.i);
+//        System.out.println(myClass2.j);
+        System.out.println(Math.abs((long)Integer.MIN_VALUE));
 
     }
 

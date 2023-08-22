@@ -1,5 +1,10 @@
 package com.xiao.basics;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
+
 /**
  * Description String相关 <br>
  *
@@ -12,9 +17,39 @@ public class StringTest {
 
 
     public static void main(String[] args) {
-        test1();
-        test2();
-        replaceTest();
+//        test1();
+//        test2();
+//        replaceTest();
+//        test3();
+//        stringJoinerTest();
+        test4();
+    }
+
+    /***
+     * description 字符串不可变性
+     * 通过字符串池吗，两个相同的脂肪层变量可以在池中指向同一个字符串对象，从而节省空间
+     *
+     * @author xiao
+     * date  16:17:41
+     */
+    private static void test3() {
+        String s = "abcd";
+        String s1 = s;
+        s = s.concat("ef");
+        System.out.println(s);
+        System.out.println(s1);
+    }
+
+    private static void test4() {
+        String s1 = new String("1");
+        s1.intern();
+        String s2 = "1";
+        System.out.println(s1 == s2);
+
+        String s3 = new String("2") + new String("2");
+        s3.intern();
+        String s4 = "22";
+        System.out.println(s3 == s4);
     }
 
     /**
@@ -31,7 +66,6 @@ public class StringTest {
         System.out.println(str.replace("a", "A"));
         System.out.println(str.replaceAll("\\d", "A"));
         System.out.println(str.replaceFirst("\\d", "H"));
-
     }
 
     /**
@@ -40,32 +74,32 @@ public class StringTest {
      * @author xiao
      * date  14:47:51
      */
-    private static void test1() {
-        String str1 = "Hello";
-        String str2 = new String("Hello");
-        char[] str3 = {'H', 'e', 'l', 'l', 'o'};
-        String str4 = new String(str3);
-        String str5 = "Hello";
-        String str6 = new String("Hello");
-        // jdk17新特性 文本块语法
-        String json = """
-                {
-                    "name": "张三",
-                    "sex": 1
-                }
-                """;
-        
-        System.out.println(str1);
-        System.out.println(str2);
-        System.out.println(str3);
-        System.out.println(str4);
-        System.out.println(str1 == str2);
-        System.out.println(str1 == str4);
-        System.out.println(str2 == str4);
-        System.out.println(str1 == str5);
-        System.out.println(str2 == str6);
-        System.out.println(json);
-    }
+//    private static void test1() {
+//        String str1 = "Hello";
+//        String str2 = new String("Hello");
+//        char[] str3 = {'H', 'e', 'l', 'l', 'o'};
+//        String str4 = new String(str3);
+//        String str5 = "Hello";
+//        String str6 = new String("Hello");
+//        // jdk17新特性 文本块语法
+//        String json = """
+//                {
+//                    "name": "张三",
+//                    "sex": 1
+//                }
+//                """;
+//
+//        System.out.println(str1);
+//        System.out.println(str2);
+//        System.out.println(str3);
+//        System.out.println(str4);
+//        System.out.println(str1 == str2);
+//        System.out.println(str1 == str4);
+//        System.out.println(str2 == str4);
+//        System.out.println(str1 == str5);
+//        System.out.println(str2 == str6);
+//        System.out.println(json);
+//    }
 
     /***
      * description 字符串累加耗时
@@ -100,6 +134,25 @@ public class StringTest {
             string1 = string1.concat(string);
         }
         System.out.println("concat累加用时:" + (System.currentTimeMillis() - start4) + "ms");
+    }
+
+    private static void stringJoinerTest() {
+        StringJoiner sj = new StringJoiner("");
+        sj.add("cd");
+        sj.add("ef");
+        System.out.println(sj);
+
+        StringJoiner sj1 = new StringJoiner(":", "[", "]");
+        sj1.add("cd");
+        sj1.add("ef");
+        System.out.println(sj1);
+
+        List<String> list = Arrays.asList("ab", "cd", "ef");
+        System.out.println(list.stream().reduce((a, b) -> a + ":" + b).get());
+
+        System.out.println(list.stream().collect(Collectors.joining(":")));
+
+        System.out.println(String.join(":", list));
     }
 
 }
