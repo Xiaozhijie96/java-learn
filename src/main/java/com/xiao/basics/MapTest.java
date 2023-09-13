@@ -69,7 +69,7 @@ public class MapTest {
         hashtable.put("2", 2);
         return hashtable;
     }
-
+    
     /**
      * description TreeMap
      * 1：和HashMap类似，TreeMap有序可以排序
@@ -99,7 +99,7 @@ public class MapTest {
         for (String key : map.keySet()) {
             System.out.printf("key:%s,value:%d%n", key, map.get(key));
         }
-        // 第二种：使用entrySet遍历 推荐，尤其是容量大时
+        // 第二种：使用entrySet遍历 推荐，尤其 是容量大时
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             System.out.printf("entrySet:key:%s,value:%d%n", entry.getKey(), entry.getValue());
         }
