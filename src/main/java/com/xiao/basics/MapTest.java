@@ -1,5 +1,7 @@
 package com.xiao.basics;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.*;
 
 /**
@@ -43,7 +45,7 @@ public class MapTest {
      * @author xiao
      * date  16:56:54
      */
-    public static LinkedHashMap<String, Integer> getLinkedHashMap() {
+    private static LinkedHashMap<String, Integer> getLinkedHashMap() {
         LinkedHashMap<String, Integer> linkedHashMap = new LinkedHashMap<>();
         linkedHashMap.put("1", 1);
         linkedHashMap.put("2", 2);
@@ -63,13 +65,13 @@ public class MapTest {
      * @author xiao
      * date  17:07:08
      */
-    public static Hashtable<String, Integer> getHashtable() {
+    private static Hashtable<String, Integer> getHashtable() {
         Hashtable<String, Integer> hashtable = new Hashtable<>();
         hashtable.put("1", 1);
         hashtable.put("2", 2);
         return hashtable;
     }
-    
+
     /**
      * description TreeMap
      * 1：和HashMap类似，TreeMap有序可以排序
@@ -79,7 +81,7 @@ public class MapTest {
      * @author xiao
      * date 17:18:27
      */
-    public static TreeMap<String, Integer> getTreeMap() {
+    private static TreeMap<String, Integer> getTreeMap() {
         TreeMap<String, Integer> treeMap = new TreeMap<>();
         treeMap.put("1", 1);
         treeMap.put("2", 2);
@@ -87,11 +89,63 @@ public class MapTest {
         return treeMap;
     }
 
-    public static void main(String[] args) {
-        forMap(getHashMap());
-        forMap(getLinkedHashMap());
-        forMap(getHashtable());
-        forMap(getTreeMap());
+    /**
+     * HashMap扩容为原来的两倍
+     */
+    private static void hashMapCapacity() throws Exception {
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0; i < 12; i++) {
+            map.put("map" + i, "map");
+        }
+        Class<?> mapType = map.getClass();
+        //容量
+        Method capacity = mapType.getDeclaredMethod("capacity");
+        capacity.setAccessible(true);
+        System.out.println("capacity : " + capacity.invoke(map));
+
+        //个数
+        Field size = mapType.getDeclaredField("size");
+        size.setAccessible(true);
+        System.out.println("size : " + size.get(map));
+
+        //临界值 = capacity * loadFactor
+        Field threshold = mapType.getDeclaredField("threshold");
+        threshold.setAccessible(true);
+        System.out.println("threshold : " + threshold.get(map));
+
+        //负载因子
+        Field loadFactor = mapType.getDeclaredField("loadFactor");
+        loadFactor.setAccessible(true);
+        System.out.println("loadFactor : " + loadFactor.get(map));
+        // size 大于 12 触发扩容
+        map.put("map12", "map");
+
+        capacity = mapType.getDeclaredMethod("capacity");
+        capacity.setAccessible(true);
+        System.out.println("capacity : " + capacity.invoke(map));
+
+
+        size = mapType.getDeclaredField("size");
+        size.setAccessible(true);
+        System.out.println("size : " + size.get(map));
+
+        threshold = mapType.getDeclaredField("threshold");
+        threshold.setAccessible(true);
+        System.out.println("threshold : " + threshold.get(map));
+
+        loadFactor = mapType.getDeclaredField("loadFactor");
+        loadFactor.setAccessible(true);
+        System.out.println("loadFactor : " + loadFactor.get(map));
+
+
+    }
+
+    public static void main(String[] args) throws Exception {
+//        forMap(getHashMap());
+//        forMap(getLinkedHashMap());
+//        forMap(getHashtable());
+//        forMap(getTreeMap());
+        hashMapCapacity();
     }
 
     private static void forMap(Map<String, Integer> map) {
