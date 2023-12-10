@@ -19,9 +19,9 @@ public class DisplacementTest {
      * @param moveLeftNumber 左移数
      */
     private static void moveLeftTest(int number, int moveLeftNumber) {
-        int moveLeftI = number << moveLeftNumber;
+        int moveLeft = number << moveLeftNumber;
         System.out.println(number + "的二进制为：" + Integer.toBinaryString(number));
-        System.out.println(number + "位移" + moveLeftNumber + "的二进制为：" + Integer.toBinaryString(moveLeftI));
+        System.out.println(number + "位移" + moveLeftNumber + "的二进制为：" + Integer.toBinaryString(moveLeft));
     }
 
     /**
