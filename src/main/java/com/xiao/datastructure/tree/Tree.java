@@ -1,4 +1,4 @@
-package com.xiao.basics.datastructure.tree;
+package com.xiao.datastructure.tree;
 
 import java.util.LinkedList;
 import java.util.List;
